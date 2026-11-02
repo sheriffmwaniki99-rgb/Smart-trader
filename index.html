@@ -174,6 +174,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trading Platform</title>
+<script>
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+  function switchModal(closeId, openId) {
+    closeModal(closeId);
+    openModal(openId);
+  }
+  function handleLogin(event) {
+    event.preventDefault();
+    closeModal('loginModal');
+  }
+  function handleSignup(event) {
+    event.preventDefault();
+    closeModal('signupModal');
+  }
+</script>
 <style>
 body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 0; }
 header { display: flex; justify-content: space-between; padding: 20px; background-color: #1f1f1f; }
