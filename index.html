@@ -1,68 +1,471 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Dashboard</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background-color: #0d1117; color: #c9d1d9; display: flex; height: 100vh; overflow: hidden; }
-.sidebar { width: 60px; background-color: #161b22; display: flex; flex-direction: column; align-items: center; padding: 20px 0; border-right: 1px border-right: 1px solid #30363d; }
-.sidebar-icon { width: 30px; height: 30px; background-color: #21262d; border-radius: 5px; margin-bottom: 20px; }
-.main-content { flex: 1; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
-.header { height: 60px; background-color: #161b22; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
-.user-info { display: flex; align-items: center; }
-.avatar { width: 35px; height: 35px; border-radius: 50%; background-color: #58a6ff; margin-right: 10px; }
-.balance { font-weight: bold; color: #3fb595; }
-.dashboard-body { flex: 1; display: flex; padding: 20px; gap: 20px; overflow: hidden; }
-.chart-section { flex: 2; background-color: #161b22; border-radius: 10px; border: 1px solid #30363d; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #8b949e; }
-.trading-panel { width: 300px; background-color: #161b22; border-radius: 10px; border: 1px solid #30363d; display: flex; flex-direction: column; padding: 20px; gap: 15px; }
-.trade-btn { width: 100%; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: #ffffff; }
-.buy-btn { background-color: #238636; }
-.buy-btn:hover { background-color: #2ea043; }
-.sell-btn { background-color: #da3633; }
-.sell-btn:hover { background-color: #b31d28; }
-.input-group { display: flex; flex-direction: column; gap: 5px; }
-input { padding: 10px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 5px; color: #c9d1d9; }
-</style>
-</head>
-<body>
-<div class="sidebar">
-<div class="sidebar-icon"></div>
-<div class="sidebar-icon"></div>
-<div class="sidebar-icon"></div>
-</div>
-<div class="main-content">
-<div class="header">
-<div class="user-info">
-<div class="avatar"></div>
-<span>Welcome back, Trader</span>
-</div>
-<div class="balance">Balance: $10,000.00</div>
-</div>
-<div class="dashboard-body">
-<div class="chart-section">
-<script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js"></script>
 
-<tv-advanced-chart allow-symbol-change></tv-advanced-chart>
+
+<html lang="en">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Quick Actions Grid</title>
+
+
+<style>
+
+
+* {
+
+
+box-sizing: border-box;
+
+
+margin: 0;
+
+
+padding: 0;
+
+
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
+}
+
+
+​body {
+
+
+background-color: #050b14;
+
+
+color: #ffffff;
+
+
+display: flex;
+
+
+justify-content: center;
+
+
+align-items: center;
+
+
+min-height: 100vh;
+
+
+padding: 20px;
+
+
+}
+
+
+​.quick-actions-container {
+
+
+display: grid;
+
+
+grid-template-columns: repeat(2, 1fr);
+
+
+gap: 20px;
+
+
+max-width: 800px;
+
+
+width: 100%;
+
+
+}
+
+
+​.card {
+
+
+background-color: #0a1118;
+
+
+border-radius: 16px;
+
+
+padding: 24px;
+
+
+display: flex;
+
+
+flex-direction: column;
+
+
+justify-content: space-between;
+
+
+border-left: 4px solid transparent;
+
+
+transition: transform 0.2s ease, border-color 0.2s ease;
+
+
+position: relative;
+
+
+overflow: hidden;
+
+
+}
+
+
+​.card:hover {
+
+
+transform: translateY(-5px);
+
+
+}
+
+
+​/* Border colors for each card */
+
+
+.card-upload { border-color: #ffbc0a; }
+
+
+.card-free { border-color: #00e5ff; }
+
+
+.card-editor { border-color: #76ff03; }
+
+
+.card-strategy { border-color: #ff3d00; }
+
+
+​.card-header {
+
+
+display: flex;
+
+
+justify-content: space-between;
+
+
+align-items: flex-start;
+
+
+margin-bottom: 20px;
+
+
+}
+
+
+​.icon {
+
+
+width: 48px;
+
+
+height: 48px;
+
+
+display: flex;
+
+
+justify-content: center;
+
+
+align-items: center;
+
+
+border-radius: 12px;
+
+
+}
+
+
+​/* Icon background colors */
+
+
+.card-upload .icon { background-color: rgba(255, 188, 10, 0.1); }
+
+
+.card-free .icon { background-color: rgba(0, 229, 255, 0.1); }
+
+
+.card-editor .icon { background-color: rgba(118, 255, 3, 0.1); }
+
+
+.card-strategy .icon { background-color: rgba(255, 61, 0, 0.1); }
+
+
+​.arrow {
+
+
+color: #8c9bae;
+
+
+font-size: 20px;
+
+
+}
+
+
+​.card-content h3 {
+
+
+font-size: 18px;
+
+
+margin-bottom: 8px;
+
+
+color: #ffffff;
+
+
+}
+
+
+​.card-content p {
+
+
+font-size: 13px;
+
+
+color: #8c9bae;
+
+
+line-height: 1.4;
+
+
+margin-bottom: 16px;
+
+
+}
+
+
+​.open-link {
+
+
+font-size: 14px;
+
+
+font-weight: 600;
+
+
+display: flex;
+
+
+align-items: center;
+
+
+gap: 8px;
+
+
+text-decoration: none;
+
+
+cursor: pointer;
+
+
+}
+
+
+​/* Text colors for links */
+
+
+.card-upload .open-link { color: #ffbc0a; }
+
+
+.card-free .open-link { color: #00e5ff; }
+
+
+.card-editor .open-link { color: #76ff03; }
+
+
+.card-strategy .open-link { color: #ff3d00; }
+
+
+​@media (max-width: 600px) {
+
+
+.quick-actions-container {
+
+
+grid-template-columns: 1fr;
+
+
+}
+
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+​<div class="quick-actions-container">
+
+
+<!-- Upload Bot -->
+
+
+<div class="card card-upload">
+
+
+<div class="card-header">
+
+
+<div class="icon">📁</div>
+
+
+<div class="arrow">➔</div>
+
+
 </div>
-<div class="trading-panel">
-<div class="input-group">
-<label>Amount (USD)</label>
-<input type="number" placeholder="100.00">
+
+
+<div class="card-content">
+
+
+<h3>Upload Bot</h3>
+
+
+<p>Import an XML bot from your computer.</p>
+
+
+<a class="open-link">Open ➔</a>
+
+
 </div>
-<div class="input-group">
-<label>Take Profit</label>
-<input type="number" placeholder="0.00">
+
+
 </div>
-<div class="input-group">
-<label>Stop Loss</label>
-<input type="number" placeholder="0.00">
+
+
+​<!-- Free Bots -->
+
+
+<div class="card card-free">
+
+
+<div class="card-header">
+
+
+<div class="icon">🤖</div>
+
+
+<div class="arrow">➔</div>
+
+
 </div>
-<button class="trade-btn buy-btn">Buy</button>
-<button class="trade-btn sell-btn">Sell</button>
+
+
+<div class="card-content">
+
+
+<h3>Free Bots</h3>
+
+
+<p>Browse ready-made trading strategies.</p>
+
+
+<a class="open-link">Open ➔</a>
+
+
 </div>
+
+
 </div>
+
+
+​<!-- Bot Editor -->
+
+
+<div class="card card-editor">
+
+
+<div class="card-header">
+
+
+<div class="icon">✂️</div>
+
+
+<div class="arrow">➔</div>
+
+
 </div>
-</body>
+
+
+<div class="card-content">
+
+
+<h3>Bot Editor</h3>
+
+
+<p>Build a custom bot with the visual editor.</p>
+
+
+<a class="open-link">Open ➔</a>
+
+
+</div>
+
+
+</div>
+
+
+​<!-- Quick Strategy -->
+
+
+<div class="card card-strategy">
+
+
+<div class="card-header">
+
+
+<div class="icon">⚡</div>
+
+
+<div class="arrow">➔</div>
+
+
+</div>
+
+
+<div class="card-content">
+
+
+<h3>Quick Strategy</h3>
+
+
+<p>Start fast with a pre-built strategy template.</p>
+
+
+<a class="open-link">Open ➔</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+​</body>
+
+
 </html>
+
+
