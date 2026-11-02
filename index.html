@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Platform Features</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Loading Screen</title>
     <style>
         :root {
             --bg-color: #030712;
-            --card-bg: #111827;
             --accent-green: #10B981;
-            --accent-purple: #8B5CF6;
             --accent-blue: #3B82F6;
             --text-main: #F9FAFB;
             --text-muted: #9CA3AF;
-            --border-color: #1F2937;
         }
 
         * {
@@ -27,199 +23,121 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 4rem 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .section-header {
+        .loader-container {
             text-align: center;
-            margin-bottom: 4rem;
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
         }
 
-        .section-header .tagline {
-            color: var(--accent-blue);
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .section-header h2 {
+        .logo {
             font-size: 3rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #9CA3AF);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
         }
 
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 1.5rem;
-            padding: 3rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 1.5rem;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            background-color: rgba(17, 24, 39, 0.8);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .icon-box {
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .welcome-text {
             font-size: 1.5rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover .icon-box {
-            transform: scale(1.1);
-        }
-
-        /* Card 1: Green Accent */
-        .card-green .icon-box {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-        }
-        .card-green:hover {
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        /* Card 2: Blue Accent */
-        .card-blue .icon-box {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-        }
-        .card-blue:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        /* Card 3: Purple Accent */
-        .card-purple .icon-box {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-        }
-        .card-purple:hover {
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             color: #fff;
         }
 
-        .feature-card p {
+        .sub-text {
             color: var(--text-muted);
-            line-height: 1.7;
             font-size: 1rem;
-            flex-grow: 1;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
-        @media (max-width: 768px) {
-            .section-header h2 {
-                font-size: 2.25rem;
+        .progress-wrapper {
+            position: relative;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            border-radius: 9999px;
+            animation: load 4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        .progress-percentage {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        @keyframes load {
+            0% {
+                width: 0%;
             }
-            .feature-card {
-                padding: 2rem;
+            10% {
+                width: 5%;
+            }
+            30% {
+                width: 25%;
+            }
+            60% {
+                width: 70%;
+            }
+            90% {
+                width: 95%;
+            }
+            100% {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="section-header">
-            <span class="tagline">Platform</span>
-            <h2>Powerful Features for Modern Traders</h2>
-            <p>Everything you need to succeed in today's fast-paced markets. Whether you prefer manual decisions, automated bot execution, or copy trading, our tools simplify your trading workflow.</p>
-        </header>
-
-        <div class="features-grid">
-            <!-- Feature 1 -->
-            <article class="feature-card card-green">
-                <div class="icon-box">
-                    <i class="fa-solid fa-robot"></i>
-                </div>
-                <h3>AI-Powered Trading Bots</h3>
-                <p>Deploy intelligent trading strategies with our advanced bot system. No coding required, just configure, test, and let the bots work for you 24/7.</p>
-            </article>
-
-            <!-- Feature 2 -->
-            <article class="feature-card card-blue">
-                <div class="icon-box">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <h3>Real-Time Market Analysis</h3>
-                <p>Access professional-grade charts, indicators, and analytics. Track market trends, identify opportunities, and execute trades with absolute confidence.</p>
-            </article>
-
-            <!-- Feature 3 -->
-            <article class="feature-card card-purple">
-                <div class="icon-box">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h3>Risk Management Tools</h3>
-                <p>Protect your capital with advanced features. Set custom stop-loss, take-profit, and position sizing tools for complete control over your drawdowns.</p>
-            </article>
+    <div class="loader-container">
+        <div class="logo">DBTRADERS</div>
+        <div class="welcome-text">Welcome to DBTraders</div>
+        <div class="sub-text">Empowering your financial journey.</div>
+        
+        <div class="progress-wrapper">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
+        <div class="progress-percentage" id="progressText">0%</div>
     </div>
 
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+            } else {
+                width++;
+                progressText.innerText = width + "%";
+            }
+        }, 40); // 40ms * 100 = 4000ms = 4 seconds
+    </script>
 </body>
 </html>
