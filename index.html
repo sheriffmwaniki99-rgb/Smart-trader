@@ -3,144 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Screen</title>
+    <title>DB Traders Dashboard</title>
     <style>
         :root {
-            --bg-color: #030712;
-            --accent-green: #10B981;
-            --accent-blue: #3B82F6;
-            --text-main: #F9FAFB;
-            --text-muted: #9CA3AF;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, sans-serif;
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-color: #4cd964;
+            --accent-purple: #af52de;
+            --accent-blue: #007aff;
+            --accent-orange: #ff9500;
+            --border-color: #30363d;
         }
 
         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+            margin-bottom: 30px;
         }
 
-        .loader-container {
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-            padding: 2rem;
+        .user-greeting h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--accent-color);
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--accent-green), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.05em;
+        .user-greeting p {
+            margin: 5px 0 0;
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
-        .welcome-text {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #fff;
+        .wallet-balance {
+            background-color: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .sub-text {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 3rem;
-            line-height: 1.6;
-            font-weight: 400;
+        .balance-amount {
+            font-weight: bold;
+            color: var(--accent-color);
         }
 
-        .progress-wrapper {
-            position: relative;
-            width: 100%;
-            height: 6px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 9999px;
-            overflow: hidden;
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-            border-radius: 9999px;
-            animation: load 4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    box-shadow: 0 0 15px var(--accent-green), 0 0 30px var(--accent-blue);
-
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 150px;
         }
 
-        .progress-percentage {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            font-weight: 600;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes load {
-            0% {
-                width: 0%;
-            }
-            10% {
-                width: 5%;
-            }
-            30% {
-                width: 25%;
-            }
-            60% {
-                width: 70%;
-            }
-            90% {
-                width: 95%;
-            }
-            100% {
-                width: 100%;
-            }
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+
+        .card p {
+            margin: 0 0 20px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .card a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Card specific border colors */
+        .card.upload { border-top: 4px solid var(--accent-blue); }
+        .card.free { border-top: 4px solid var(--accent-purple); }
+        .card.editor { border-top: 4px solid var(--accent-color); }
+        .card.strategy { border-top: 4px solid var(--accent-orange); }
+        
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="user-greeting">
+                <h1>Bon après-midi, ROT91075092 ✋</h1>
+                <p>"Discipline beats intelligence in the long run."</p>
+            </div>
+            <div class="wallet-balance">
+                <span>Balance:</span>
+                <span class="balance-amount">0.00 USD</span>
+            </div>
+        </header>
 
-    <div class="loader-container">
-        <div class="logo">SMARTTRADE.COM</div>
-        <div class="welcome-text">Welcome to SmartTraders.com</div>
-        <div class="sub-text">Empowering your financial journey.</div>
-        
-        <div class="progress-wrapper">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-percentage" id="progressText">0%</div>
+        <section class="quick-actions">
+            <div class="card upload">
+                <div>
+                    <h3>📁 Upload Bot</h3>
+                    <p>Import an XML bot from your computer.</p>
+                </div>
+                <a href="#">Open →</a>
+            </div>
+
+            <div class="card free">
+                <div>
+                    <h3>🤖 Free Bots</h3>
+                    <p>Browse ready-made trading strategies.</p>
+                </div>
+                <a href="#">Open →</a>
+            </div>
+
+            <div class="card editor">
+                <div>
+                    <h3>🔨 Bot Editor</h3>
+                    <p>Build a custom bot with the visual editor.</p>
+                </div>
+                <a href="#">Open →</a>
+            </div>
+
+            <div class="card strategy">
+                <div>
+                    <h3>⚡ Quick Strategy</h3>
+                    <p>Start fast with a pre-built strategy template.</p>
+                </div>
+                <a href="#">Open →</a>
+            </div>
+        </section>
     </div>
-
-    <script>
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-        
-        let width = 0;
-        const interval = setInterval(() => {
-            if (width >= 100) {
-                clearInterval(interval);
-                window.location.href = 'https://app.deriv.com';
-            } else {
-                width++;
-                progressText.innerText = width + "%";
-                progressBar.style.width = width + '%';
-            }
-        }, 40); // 40ms * 100 = 4000ms = 4 seconds
-    </script>
 </body>
 </html>
