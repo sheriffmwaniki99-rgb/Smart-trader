@@ -260,6 +260,28 @@ nav a { color: #fff; text-decoration: none; margin-left: 20px; }
       <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('signupModal', 'loginModal')">Sign In</a></p>
     </form>
   </div>
-</div>
+</div><script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDKi_fyL3yn1XYUYEdYJviLX4kUCmowNLk",
+    authDomain: "sheriff-mwaniki-store.firebaseapp.com",
+    projectId: "sheriff-mwaniki-store",
+    storageBucket: "sheriff-mwaniki-store.firebasestorage.app",
+    messagingSenderId: "390953400987",
+    appId: "1:390953400987:web:babc9ceb1dbf9db210643e",
+    measurementId: "G-JGF381L90Z"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 
 </html>
